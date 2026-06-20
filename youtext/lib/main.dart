@@ -22,5 +22,8 @@ FAILURE: Build failed with an exception.
 
 * What went wrong:
 Execution failed for task ':app:configureCMakeDebug[x86_64]'.
+
+
+> [CXX1429] error when building with cmake using C:\src\flutter\packages\flutter_tools\gradle\src\main\scripts\CMakeLists.txt: Not searching for unused variables given on the command line.
 */
 
