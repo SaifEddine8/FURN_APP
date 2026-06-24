@@ -40,7 +40,7 @@ class ProductCard extends StatelessWidget {
               mainAxisAlignment: .spaceBetween,
               children: [
                 Text("\$ ${data.price.toString()}",style: Theme.of(context).textTheme.labelMedium,),
-                IconButton(onPressed: changeStatus, icon: Icon(data.isFav?Icons.favorite:Icons.favorite_border_outlined))
+                IconButton(onPressed: changeStatus, icon: Icon(data.isFav?Icons.favorite:Icons.favorite_border_outlined ,color: Colors.red,))
               ],
             ),
               ]

@@ -3,10 +3,13 @@ import 'package:youtext/model/product_model.dart';
 
 
 List<String> categories=[
+
+    "All",
     "Chair",
     "Cupboard",
     "Table",
     "Lamp",
+    "Bed"
   ];
 
 
@@ -22,6 +25,7 @@ List<ProductModel> products = [
     review: 4.7,
     image:
         "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800",
+        category: "Chair"
   ),
   ProductModel(
     name: "Modern Sofa",
@@ -31,6 +35,7 @@ List<ProductModel> products = [
     review: 4.9,
     image:
         "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800",
+        category: "Chair"
   ),
   ProductModel(
     name: "Oak Dining Table",
@@ -40,6 +45,7 @@ List<ProductModel> products = [
     review: 4.8,
     image:
         "https://images.unsplash.com/photo-1577140917170-285929fb55b7?w=800",
+        category: "Table"
   ),
   ProductModel(
     name: "Queen Bed",
@@ -49,5 +55,6 @@ List<ProductModel> products = [
     review: 4.9,
     image:
         "https://images.unsplash.com/photo-1577140917170-285929fb55b7?w=800",
+        category: "Bed"
   ),
 ];

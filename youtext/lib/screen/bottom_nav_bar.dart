@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:youtext/db/product_db.dart';
+import 'package:youtext/model/product_model.dart';
 import 'package:youtext/screen/cart_screen.dart';
 import 'package:youtext/screen/favorite_screen.dart';
 import 'package:youtext/screen/home_screen.dart';
@@ -19,14 +21,21 @@ class _BottomNavBarState extends State<BottomNavBar> {
     'Cart':Icon(Icons.card_travel),
     'Profile':Icon(Icons.person)
   };
+  
+  
+  @override
+  Widget build(BuildContext context) {
+    List<ProductModel> favProduct=products.where(
+    (item)=>
+    item.isFav==true
+  
+  ).toList();
   List<Widget> screens=[
    HomeScreen(),
-    FavoriteScreen(),
+    FavoriteScreen(favList: favProduct,),
     CartScreen(),
     ProfileScreen()
   ];
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(child: screens[index]),
       
