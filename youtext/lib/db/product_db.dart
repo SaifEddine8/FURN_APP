@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:youtext/model/product_model.dart';
 
 
@@ -25,7 +26,14 @@ List<ProductModel> products = [
     review: 4.7,
     image:
         "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800",
-        category: "Chair"
+        category: "Chair",
+        colors: [
+          Colors.black,
+          Colors.white,
+          Colors.blue,
+          Colors.brown,
+
+        ]
   ),
   ProductModel(
     name: "Modern Sofa",
@@ -35,7 +43,13 @@ List<ProductModel> products = [
     review: 4.9,
     image:
         "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800",
-        category: "Chair"
+        category: "Chair",
+        colors: [
+          Colors.black,
+          
+          Colors.brown,
+
+        ]
   ),
   ProductModel(
     name: "Oak Dining Table",
@@ -45,7 +59,14 @@ List<ProductModel> products = [
     review: 4.8,
     image:
         "https://images.unsplash.com/photo-1577140917170-285929fb55b7?w=800",
-        category: "Table"
+        category: "Table",
+        colors: [
+          Colors.black,
+          Colors.white,
+          Colors.blue,
+          
+
+        ]
   ),
   ProductModel(
     name: "Queen Bed",
@@ -55,6 +76,13 @@ List<ProductModel> products = [
     review: 4.9,
     image:
         "https://images.unsplash.com/photo-1577140917170-285929fb55b7?w=800",
-        category: "Bed"
+        category: "Bed",
+        colors: [
+          
+          Colors.white,
+          Colors.blue,
+          Colors.brown,
+
+        ]
   ),
 ];

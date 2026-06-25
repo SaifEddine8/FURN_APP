@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 class ProductModel {
 final String name;
 final String description;
@@ -7,6 +9,7 @@ final double review;
 final String image;
 final String category;
 final bool isFav;
+final List<Color>colors;
  ProductModel({
   required this.name,
   required this.description,
@@ -16,14 +19,15 @@ final bool isFav;
   required this.image,
   required this.category,
 
-  this.isFav=false
+  this.isFav=false,
+  required this.colors
 
 
 });
 
 
 ProductModel copyWith(
-  {String? name,String? description,String? subDescription,double? price,double? review,String? image,bool? isFav,String? category}
+  {String? name,String? description,String? subDescription,double? price,double? review,String? image,bool? isFav,String? category,List<Color>?colors}
 ){
   return ProductModel(
    name: name??=this.name,
@@ -33,7 +37,8 @@ ProductModel copyWith(
    review: review??=this.review,
    image: image??=this.image,
    isFav: isFav??=this.isFav,
-   category: category??=this.category
+   category: category??=this.category,
+   colors: colors??=this.colors
   );
   
 
