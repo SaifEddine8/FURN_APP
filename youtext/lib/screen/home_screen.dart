@@ -109,6 +109,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   products[indexOfFilterList]=products[indexOfFilterList].copyWith(isFav: !products[indexOfFilterList].isFav);
                 });
 
+              },
+              refresh: (){
+                setState(() {
+                  
+                });
               }, ) ,
              
             ),

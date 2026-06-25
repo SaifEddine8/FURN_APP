@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:youtext/constants/colors.dart';
 import 'package:youtext/constants/style.dart';
+import 'package:youtext/db/product_db.dart';
 import 'package:youtext/model/product_model.dart';
+import 'package:youtext/widgets/product_screen_card.dart';
 
 class ProductScreen extends StatefulWidget {
   ProductModel item;
-  ProductScreen({super.key, required this.item});
+  ProductScreen({super.key, required this.item,});
 
   @override
   State<ProductScreen> createState() => _ProductScreenState();
@@ -14,24 +17,38 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      
+      appBar: AppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: InkWell(
+              onTap: ()
+              {
+                int index=products.indexOf(widget.item);
+                setState(() {
+                  widget.item=widget.item.copyWith(isFav: !widget.item.isFav);
+                  products[index]=widget.item;
+                });
+                
+              }
+              ,
+              
+              child: Icon(widget.item.isFav?Icons.favorite:Icons.favorite_border_outlined,color: Colors.red,)),
+          )
+        ],
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
+            
             mainAxisAlignment: .spaceBetween,
 
             crossAxisAlignment: .start,
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(widget.item.image),
-                  ),
-                ),
-                height: 200,
-                //width: 100,
-              ),
+              SizedBox(height: 20,),
+             ProductScreenCard(item: widget.item,),
 
               //Divider(),
               Padding(
@@ -78,7 +95,7 @@ class _ProductScreenState extends State<ProductScreen> {
                       height: 50,
                       width: MediaQuery.of(context).size.width * 0.6,
                       decoration: BoxDecoration(
-                        color: Color(0xcd2f4b4e),
+                        color: ColorsClass.primaryColor,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Center(

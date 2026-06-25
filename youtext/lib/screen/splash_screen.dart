@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:youtext/constants/colors.dart';
 import 'package:youtext/screen/bottom_nav_bar.dart';
 import 'package:youtext/screen/on_boarding_screen.dart';
 import 'package:youtext/screen/test.dart';
@@ -29,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xcd2f4b4e),
+      backgroundColor: ColorsClass.primaryColor,
       body:
       SizedBox(
         width: double.infinity,

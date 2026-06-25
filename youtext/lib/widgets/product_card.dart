@@ -6,15 +6,22 @@ import 'package:youtext/screen/product_screen.dart';
 class ProductCard extends StatelessWidget {
   ProductModel data;
   VoidCallback changeStatus;
-  ProductCard({super.key, required this.data, required this.changeStatus});
+  VoidCallback refresh;
+  ProductCard({super.key, required this.data, required this.changeStatus,required this.refresh});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.push(
+      onTap: () async{ 
+       await Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => ProductScreen(item: data)),
-      ),
+        MaterialPageRoute(builder: (context) => ProductScreen(item: data,)
+        ),
+      
+        
+      );
+      refresh();
+      },
       child: Card(
         child: Column(
           children: [

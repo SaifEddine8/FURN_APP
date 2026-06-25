@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youtext/constants/colors.dart';
 import 'package:youtext/db/product_db.dart';
 import 'package:youtext/model/product_model.dart';
 import 'package:youtext/screen/cart_screen.dart';
@@ -41,7 +42,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
-        selectedItemColor: Color(0xcd2f4b4e),
+        selectedItemColor: ColorsClass.primaryColor,
         unselectedItemColor: Colors.grey,
         items: itemsList.entries.map((i)=>
         BottomNavigationBarItem(
