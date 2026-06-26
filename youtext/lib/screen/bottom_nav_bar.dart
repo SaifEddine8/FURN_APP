@@ -30,13 +30,19 @@ class _BottomNavBarState extends State<BottomNavBar> {
     (item)=>
     item.isFav==true
   
+  ).toList(); 
+  List<ProductModel>selectedProducts=products.where(
+    (item)=>
+    item.isSelect==true
+  
   ).toList();
   List<Widget> screens=[
    HomeScreen(),
     FavoriteScreen(favList: favProduct,),
-    CartScreen(),
+    CartScreen(jointItems: selectedProducts,),
     ProfileScreen()
   ];
+ 
     return Scaffold(
       body: SafeArea(child: screens[index]),
       

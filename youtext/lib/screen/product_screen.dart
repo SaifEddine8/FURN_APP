@@ -17,6 +17,8 @@ class _ProductScreenState extends State<ProductScreen> {
   int selectedIndex=-1;
   @override
   Widget build(BuildContext context) {
+      int index=products.indexOf(widget.item);
+
     return Scaffold(
       
       appBar: AppBar(
@@ -26,7 +28,7 @@ class _ProductScreenState extends State<ProductScreen> {
             child: InkWell(
               onTap: ()
               {
-                int index=products.indexOf(widget.item);
+                
                 setState(() {
                   widget.item=widget.item.copyWith(isFav: !widget.item.isFav);
                   products[index]=widget.item;
@@ -142,23 +144,31 @@ class _ProductScreenState extends State<ProductScreen> {
                           ),
                         ),
                       ),
-                      Container(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width * 0.6,
-                        decoration: BoxDecoration(
-                          color: ColorsClass.primaryColor,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: .center,
-                          spacing: 16,
-                          children: [ 
-                            Text("ADD TO CART",
-                          style: TextStyle(color: Colors.white, fontSize: 16),
+                      InkWell(
+                        onTap: () => 
                         
-                        ),
-                        Icon(Icons.card_travel_outlined,color: Colors.white,)
-                          ]
+                        setState(() {
+                          widget.item=widget.item.copyWith(isSelect: !widget.item.isSelect);
+                          products[index]=widget.item;
+                        }),
+                        child: Container(
+                          height: 50,
+                          width: MediaQuery.of(context).size.width * 0.6,
+                          decoration: BoxDecoration(
+                            color: ColorsClass.primaryColor,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: .center,
+                            spacing: 16,
+                            children: [ 
+                              Text("ADD TO CART",
+                            style: TextStyle(color: Colors.white, fontSize: 16),
+                          
+                          ),
+                          Icon(Icons.card_travel_outlined,color: Colors.white,)
+                            ]
+                          ),
                         ),
                       ),
                     ],
