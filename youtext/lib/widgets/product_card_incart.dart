@@ -93,7 +93,7 @@ class _ProductCardIncartState extends State<ProductCardIncart> {
                     int index=products.indexOf(widget.item);
                     
                     setState(() {
-                    widget.item=widget.item.copyWith(isSelect: !widget.item.isSelect);
+                     widget.item=widget.item.copyWith(isSelect: !widget.item.isSelect);
                     products[index]=widget.item;
                     
                   }
