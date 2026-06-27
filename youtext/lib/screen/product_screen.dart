@@ -7,59 +7,59 @@ import 'package:youtext/widgets/item_colors.dart';
 
 class ProductScreen extends StatefulWidget {
   ProductModel item;
-  ProductScreen({super.key, required this.item,});
+  ProductScreen({super.key, required this.item});
 
   @override
   State<ProductScreen> createState() => _ProductScreenState();
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-  int selectedIndex=-1;
+  int selectedIndex = -1;
   @override
   Widget build(BuildContext context) {
-      int index=products.indexOf(widget.item);
+    int index = products.indexOf(widget.item);
 
     return Scaffold(
-      
       appBar: AppBar(
         actions: [
           Padding(
             padding: const EdgeInsets.all(16),
             child: InkWell(
-              onTap: ()
-              {
-                
+              onTap: () {
                 setState(() {
-                  widget.item=widget.item.copyWith(isFav: !widget.item.isFav);
-                  products[index]=widget.item;
+                  widget.item = widget.item.copyWith(isFav: !widget.item.isFav);
+                  products[index] = widget.item;
                 });
-                
-              }
-              ,
-              
-              child: Icon(widget.item.isFav?Icons.favorite:Icons.favorite_border_outlined,color: Colors.red,)),
-          )
+              },
+
+              child: Icon(
+                widget.item.isFav
+                    ? Icons.favorite
+                    : Icons.favorite_border_outlined,
+                color: Colors.red,
+              ),
+            ),
+          ),
         ],
       ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
-            
             mainAxisAlignment: .spaceBetween,
 
             crossAxisAlignment: .start,
             children: [
-              SizedBox(height: 20,),
-             Container(
+              SizedBox(height: 20),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.3,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: NetworkImage(widget.item.image),
                   ),
                 ),
-                height: 250,
                 width: double.infinity,
-                  ),
+              ),
 
               //Divider(),
               Padding(
@@ -83,45 +83,49 @@ class _ProductScreenState extends State<ProductScreen> {
                   style: TextStyle(fontSize: 16),
                 ),
               ),
-              SizedBox(height: 16,),
+              SizedBox(height: 16),
               Card(
                 color: Color.fromARGB(255, 205, 222, 223),
                 child: Container(
                   height: 80,
                   width: .infinity,
                   decoration: BoxDecoration(
-                    
-                    borderRadius: BorderRadius.circular(20)
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(8),
                     child: Column(
                       crossAxisAlignment: .start,
                       children: [
-                        Text("Color",style: TextStyle(fontWeight: .bold,fontSize: 16),),
+                        Text(
+                          "Color",
+                          style: TextStyle(fontWeight: .bold, fontSize: 16),
+                        ),
                         Expanded(
                           child: ListView.builder(
-                            
-                          scrollDirection: .horizontal,
+                            scrollDirection: .horizontal,
                             itemCount: widget.item.colors.length,
-                            itemBuilder: (context,index)=>
-                             InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    selectedIndex=index;
-                                  });
-                                },
-                                
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                  child: ItemColors.colorItem(c:widget.item.colors[index],isSelectedColor: selectedIndex==index?true:false ),
-                                )),
-                            )
-                          
-                         
+                            itemBuilder: (context, index) => InkWell(
+                              onTap: () {
+                                setState(() {
+                                  selectedIndex = index;
+                                });
+                              },
+
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0,
+                                ),
+                                child: ItemColors.colorItem(
+                                  c: widget.item.colors[index],
+                                  isSelectedColor: selectedIndex == index
+                                      ? true
+                                      : false,
+                                ),
+                              ),
+                            ),
                           ),
-                        
-                        
+                        ),
                       ],
                     ),
                   ),
@@ -145,11 +149,11 @@ class _ProductScreenState extends State<ProductScreen> {
                         ),
                       ),
                       InkWell(
-                        onTap: () => 
-                        
-                        setState(() {
-                          widget.item=widget.item.copyWith(isSelect: !widget.item.isSelect);
-                          products[index]=widget.item;
+                        onTap: () => setState(() {
+                          widget.item = widget.item.copyWith(
+                            isSelect: !widget.item.isSelect,
+                          );
+                          products[index] = widget.item;
                         }),
                         child: Container(
                           height: 50,
@@ -161,13 +165,19 @@ class _ProductScreenState extends State<ProductScreen> {
                           child: Row(
                             mainAxisAlignment: .center,
                             spacing: 16,
-                            children: [ 
-                              Text("ADD TO CART",
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          
-                          ),
-                          Icon(Icons.card_travel_outlined,color: Colors.white,)
-                            ]
+                            children: [
+                              Text(
+                                "ADD TO CART",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Icon(
+                                Icons.card_travel_outlined,
+                                color: Colors.white,
+                              ),
+                            ],
                           ),
                         ),
                       ),

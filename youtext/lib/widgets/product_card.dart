@@ -7,20 +7,22 @@ class ProductCard extends StatelessWidget {
   ProductModel data;
   VoidCallback changeStatus;
   VoidCallback refresh;
-  ProductCard({super.key, required this.data, required this.changeStatus,required this.refresh});
+  ProductCard({
+    super.key,
+    required this.data,
+    required this.changeStatus,
+    required this.refresh,
+  });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () async{ 
-       await Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => ProductScreen(item: data,)
-        ),
-      
-        
-      );
-      refresh();
+      onTap: () async {
+        await Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ProductScreen(item: data)),
+        );
+        refresh();
       },
       child: Card(
         child: Column(
