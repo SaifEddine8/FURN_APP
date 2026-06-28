@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:youtext/constants/colors.dart';
 import 'package:youtext/db/product_db.dart';
+import 'package:youtext/model/cart_item_model.dart';
 import 'package:youtext/model/product_model.dart';
+import 'package:youtext/widgets/item_colors.dart';
 
 class ProductCardIncart extends StatefulWidget {
-  ProductModel item;
-  //VoidCallback refresh;
-  VoidCallback ontap;
+CartItemModel data;  //VoidCallback refresh;
+  VoidCallback remove;
+  VoidCallback add;
+  VoidCallback sub;
+
+
   ProductCardIncart({
     super.key,
-    required this.item,
+    required this.data,
     // required this.refresh,
-    required this.ontap,
+    required this.remove,
+    required this.add,
+    required this.sub
   });
 
   @override
@@ -20,8 +27,10 @@ class ProductCardIncart extends StatefulWidget {
 
 class _ProductCardIncartState extends State<ProductCardIncart> {
   @override
-  int quant = 1;
+
   Widget build(BuildContext context) {
+          double w = MediaQuery.of(context).size.width;
+
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -33,7 +42,7 @@ class _ProductCardIncartState extends State<ProductCardIncart> {
                 ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(30)),
                   child: Image.network(
-                    widget.item.image,
+                    widget.data.item.image,
                     width: 100,
                     height: 100,
                   ),
@@ -43,30 +52,45 @@ class _ProductCardIncartState extends State<ProductCardIncart> {
             Column(
               spacing: 8,
               children: [
-                Text(widget.item.name),
-                Text(widget.item.subDescription),
+                Text(widget.data.item.name),
+                SizedBox(
+                  width: w*0.25,
+                  child: Row(
+                    mainAxisAlignment: .spaceAround,
+                    children: [
+                      Text(widget.data.item.subDescription),
+                      ItemColors.colorItem(c: widget.data.selectedColor, isSelectedColor:false )
+                    ],
+                  ),
+                ),
                 Row(
                   spacing: 16,
                   children: [
-                    Container(
-                      height: 30,
-                      width: 30,
-                      decoration: BoxDecoration(shape: BoxShape.circle),
-                      child: Icon(
-                        Icons.minimize,
-                        color: ColorsClass.primaryColor,
-                        size: 15,
+                    InkWell(
+                      onTap: widget.sub,
+                      child: Container(
+                        height: 30,
+                        width: 30,
+                        decoration: BoxDecoration(shape: BoxShape.circle),
+                        child: Icon(
+                          Icons.minimize,
+                          color: ColorsClass.primaryColor,
+                          size: 15,
+                        ),
                       ),
                     ),
-                    Text("$quant"),
-                    Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                        color: ColorsClass.primaryColor,
-                        shape: BoxShape.circle,
+                    Text("${widget.data.quantity}"),
+                    InkWell(
+                      onTap: widget.add,
+                      child: Container(
+                        width: 30,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          color: ColorsClass.primaryColor,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(Icons.add, color: Colors.white, size: 15),
                       ),
-                      child: Icon(Icons.add, color: Colors.white, size: 15),
                     ),
                   ],
                 ),
@@ -75,7 +99,7 @@ class _ProductCardIncartState extends State<ProductCardIncart> {
             Column(
               children: [
                 Text(
-                  "\$${widget.item.price}",
+                  "\$${widget.data.item.price}",
                   style: TextStyle(
                     fontSize: 16,
                     color: ColorsClass.primaryColor,
@@ -83,7 +107,7 @@ class _ProductCardIncartState extends State<ProductCardIncart> {
                 ),
                 SizedBox(height: 30),
                 InkWell(
-                  onTap: widget.ontap,
+                  onTap: widget.remove,
                   child: Icon(Icons.remove_shopping_cart_sharp),
                 ),
               ],

@@ -31,15 +31,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
     item.isFav==true
   
   ).toList(); 
-  List<ProductModel>selectedProducts=products.where(
-    (item)=>
-    item.isSelect==true
-  
-  ).toList();
+ 
   List<Widget> screens=[
    HomeScreen(),
     FavoriteScreen(favList: favProduct,),
-    CartScreen(jointItems: selectedProducts,),
+    CartScreen(),
     ProfileScreen()
   ];
  

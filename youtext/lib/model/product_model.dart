@@ -10,7 +10,6 @@ final String image;
 final String category;
 final bool isFav;
 final List<Color>colors;
-final bool isSelect;
  ProductModel({
   required this.name,
   required this.description,
@@ -22,14 +21,13 @@ final bool isSelect;
 
   this.isFav=false,
   required this.colors,
-  this.isSelect=false,
 
 
 });
 
 
 ProductModel copyWith(
-  {String? name,String? description,String? subDescription,double? price,double? review,String? image,bool? isFav,String? category,List<Color>?colors,bool? isSelect}
+  {String? name,String? description,String? subDescription,double? price,double? review,String? image,bool? isFav,String? category,List<Color>?colors}
 ){
   return ProductModel(
    name: name??=this.name,
@@ -41,7 +39,6 @@ ProductModel copyWith(
    isFav: isFav??=this.isFav,
    category: category??=this.category,
    colors: colors??=this.colors,
-   isSelect: isSelect??this.isSelect
   );
   
 

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:youtext/constants/colors.dart';
 import 'package:youtext/constants/style.dart';
+import 'package:youtext/db/cart_db.dart';
 import 'package:youtext/db/product_db.dart';
 import 'package:youtext/model/product_model.dart';
 import 'package:youtext/widgets/product_card_incart.dart';
 
 class CartScreen extends StatefulWidget {
-  List<ProductModel> jointItems;
-  CartScreen({super.key, required this.jointItems});
+  CartScreen({super.key,});
 
   @override
   State<CartScreen> createState() => _CartScreenState();
@@ -33,18 +33,22 @@ class _CartScreenState extends State<CartScreen> {
             ),
             ListView.builder(
               shrinkWrap: true,
-              itemCount: widget.jointItems.length,
+              itemCount: cart.length,
               itemBuilder: (context, index) => ProductCardIncart(
-                ontap: () {
-                  int indexidb = products.indexOf(widget.jointItems[index]);
+                remove: () {
                   setState(() {
-                    widget.jointItems[index] = widget.jointItems[index]
-                        .copyWith(isSelect: !widget.jointItems[index].isSelect);
-                    products[indexidb] = widget.jointItems[index];
+                    cart.removeAt(index);
+                       
                   });
-                  widget.jointItems.removeAt(index);
                 },
-                item: widget.jointItems[index],
+                data: cart[index],
+                
+                add: () => setState(() {
+                  cart[index]=cart[index].copyWith(quantity: cart[index].quantity+1);
+                }),
+                sub: () => setState(() {
+                  cart[index]=cart[index].copyWith(quantity: cart[index].quantity-1);
+                })
               ),
             ),
 
@@ -117,7 +121,7 @@ class _CartScreenState extends State<CartScreen> {
                       children: [
                         Text("Subtotal"),
                         Text(
-                          "\$${widget.jointItems.fold(0.0, (sum, item) => sum + item.price)}",
+                          "\$${cart.fold(0.0, (sum, item) => sum + item.item.price)}",
                           style: TextStyle(fontWeight: .bold),
                         ),
                       ],

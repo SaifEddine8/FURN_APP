@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:youtext/constants/colors.dart';
 import 'package:youtext/constants/style.dart';
+import 'package:youtext/db/cart_db.dart';
 import 'package:youtext/db/product_db.dart';
+import 'package:youtext/model/cart_item_model.dart';
 import 'package:youtext/model/product_model.dart';
 import 'package:youtext/widgets/item_colors.dart';
 
@@ -15,6 +17,7 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   int selectedIndex = -1;
+ late Color itemColor;
   @override
   Widget build(BuildContext context) {
     int index = products.indexOf(widget.item);
@@ -109,6 +112,7 @@ class _ProductScreenState extends State<ProductScreen> {
                               onTap: () {
                                 setState(() {
                                   selectedIndex = index;
+                                  itemColor=widget.item.colors[index];
                                 });
                               },
 
@@ -149,12 +153,21 @@ class _ProductScreenState extends State<ProductScreen> {
                         ),
                       ),
                       InkWell(
-                        onTap: () => setState(() {
-                          widget.item = widget.item.copyWith(
-                            isSelect: !widget.item.isSelect,
-                          );
-                          products[index] = widget.item;
-                        }),
+                        onTap: ()  
+                        {
+                          int index=cart.indexWhere((data)=>data.item==widget.item&&data.selectedColor==itemColor);
+                        setState(() {
+                          if(index!=-1)
+                          {
+                           cart[index]=cart[index].copyWith(quantity:cart[index].quantity+1 );
+                          }
+                          else
+                          {
+                            cart.add(CartItemModel(item: widget.item, selectedColor: itemColor));
+                          }
+                         
+                        });
+                        },
                         child: Container(
                           height: 50,
                           width: MediaQuery.of(context).size.width * 0.6,
