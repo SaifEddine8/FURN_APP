@@ -14,8 +14,10 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  
   @override
   Widget build(BuildContext context) {
+    double subtotal=cart.fold(0.0, (sum, item) => sum + item.item.price*item.quantity);
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
 
@@ -75,6 +77,7 @@ class _CartScreenState extends State<CartScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(4),
                   child: Column(
+                    mainAxisAlignment: .spaceAround,
                     crossAxisAlignment: .start,
                     children: [
                       Text("Promo Code", style: StyleClass.listTitle),
@@ -121,7 +124,7 @@ class _CartScreenState extends State<CartScreen> {
                       children: [
                         Text("Subtotal"),
                         Text(
-                          "\$${cart.fold(0.0, (sum, item) => sum + item.item.price)}",
+                          "\$$subtotal",
                           style: TextStyle(fontWeight: .bold),
                         ),
                       ],
@@ -137,7 +140,7 @@ class _CartScreenState extends State<CartScreen> {
                       mainAxisAlignment: .spaceBetween,
                       children: [
                         Text("Service Free"),
-                        Text("\$1.5", style: TextStyle(fontWeight: .bold)),
+                        Text("\$${subtotal*0.1}", style: TextStyle(fontWeight: .bold)),
                       ],
                     ),
                   ],

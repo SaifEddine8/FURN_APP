@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:youtext/constants/colors.dart';
 import 'package:youtext/constants/style.dart';
 import 'package:youtext/db/cart_db.dart';
@@ -6,6 +7,7 @@ import 'package:youtext/db/product_db.dart';
 import 'package:youtext/model/cart_item_model.dart';
 import 'package:youtext/model/product_model.dart';
 import 'package:youtext/widgets/item_colors.dart';
+  
 
 class ProductScreen extends StatefulWidget {
   ProductModel item;
@@ -17,10 +19,20 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   int selectedIndex = -1;
- late Color itemColor;
+  late FToast fToast;
+  Color ?itemColor;
+@override
+void initState() {
+  super.initState();
+  fToast = FToast();
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    fToast.init(context);
+  });
+}
   @override
   Widget build(BuildContext context) {
     int index = products.indexOf(widget.item);
+    
 
     return Scaffold(
       appBar: AppBar(
@@ -155,16 +167,27 @@ class _ProductScreenState extends State<ProductScreen> {
                       InkWell(
                         onTap: ()  
                         {
+                          if(itemColor==null ||selectedIndex==-1)
+                          {
+                            showSuccessToast(false);
+                            return;
+
+
+                          }
                           int index=cart.indexWhere((data)=>data.item==widget.item&&data.selectedColor==itemColor);
-                        setState(() {
+                        setState(() { 
+                         
                           if(index!=-1)
                           {
                            cart[index]=cart[index].copyWith(quantity:cart[index].quantity+1 );
+                           showSuccessToast(true);
                           }
                           else
                           {
-                            cart.add(CartItemModel(item: widget.item, selectedColor: itemColor));
+                            cart.add(CartItemModel(item: widget.item, selectedColor: itemColor!));
+                            showSuccessToast(true);
                           }
+                          
                          
                         });
                         },
@@ -204,4 +227,35 @@ class _ProductScreenState extends State<ProductScreen> {
       ),
     );
   }
+  void showSuccessToast(bool check) {
+  Widget toast = Container(
+    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+    decoration: BoxDecoration(
+      color:check? Colors.green:Colors.red,
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(check?Icons.check:Icons.not_interested_sharp, color: Colors.white),
+        SizedBox(width: 10),
+        Text(
+
+          check?"Added Successfully":"failed added",
+          style: TextStyle(color: Colors.white),
+        ),
+      ],
+    ),
+  );
+
+  fToast.showToast(
+    child: toast,
+    gravity: ToastGravity.CENTER, // أو BOTTOM
+    toastDuration: Duration(seconds: 2),
+  );
 }
+
+}
+
+
+
