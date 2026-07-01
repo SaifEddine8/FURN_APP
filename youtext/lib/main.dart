@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:youtext/counterApp/counter_screen.dart';
+import 'package:youtext/model/class_mocdel.dart';
 import 'package:youtext/screen/splash_screen.dart';
+import 'package:youtext/view/counter_ui.dart';
 
 void main() {
-  runApp(MaterialApp(
-  home:
-  SplashScreen()
+  runApp(ChangeNotifierProvider(
+    create: (context) => ClassMocdel(),
+    child: MaterialApp(
+    home:
+    CounterUI()
+    ),
   )
   );
 }
